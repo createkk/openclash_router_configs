@@ -1,0 +1,331 @@
+#此配置搭配clash meta内核使用
+mixed-port: 7890 # 局域网访问Port
+bind-address: '*' #绑定IP地址
+allow-lan: true # 允许局域网访问
+mode: rule # 模式
+log-level: warning # 日志等级
+external-controller: 0.0.0.0:9090 # 网页端口
+find-process-mode: strict   # 匹配所有进程
+tcp-concurrent: true # tcp 并发模式
+ipv6: true #windows建议开启
+
+# ui部分
+secret: ""
+external-ui: .\ui\public
+
+geodata-mode: true
+geox-url:                           # 自定义 geodata url, 需要有代理的前提才能下载geoip和geosite
+    geoip: "https://gcore.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
+    geosite: "https://gcore.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
+    mmdb: "https://gcore.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
+  
+# fakeip 本地存储，省略DNS查询
+profile:
+    store-selected: false      # 存储 select 选择记录
+    store-fake-ip: true        # 持久化 fake-ip
+
+# Tun 配置 Windows使用
+tun:
+    enable: true  #PC端开启 路由器不开启
+    stack: system # gvisor / lwip
+    dns-hijack:
+        - 0.0.0.0:53 # 需要劫持的 DNS
+    auto-route: true # 自动设置全局路由，可以自动将全局流量路由进入tun网卡。
+    auto-detect-interface: true # 自动识别出口网卡
+
+dns:
+    enable: true # 关闭将使用系统 DNS
+    prefer-h3: true # 开启 DoH 支持 HTTP/3，将并发尝试
+    listen: ':53' # 开启 DNS 服务器监听ipv4/ipv6
+    default-nameserver:
+        - system # 如果是windows或安卓客户端可使用system，如果是软路由填写你的光猫的IP地址，拨号的路由器的IP地址 DNS 不必关闭光猫的ipv6功能,openclash运行在主路由上时填写127.0.0.1 记住是替换，不要保留system
+        - 119.29.29.29
+    enhanced-mode: fake-ip
+    fake-ip-range: 198.18.0.1/16
+    fake-ip-filter:   #这里可以填写不使用fakeip的域名
+        - '*.lan'
+        - '*.battlenet.com.cn'
+        - '*.battlenet.com'
+        - '*.blzstatic.cn'
+        - '*.battle.net'
+        # === Linksys Wireless Router ===
+        - '*.linksys.com'
+        - '*.linksyssmartwifi.com'
+        # === Apple Software Update Service ===
+        - 'swscan.apple.com'
+        - 'mesu.apple.com'
+        # === Windows 10 Connnect Detection ===
+        - '*.msftconnecttest.com'
+        - '*.msftncsi.com'
+        # === NTP Service ===
+        - 'time.*.com'
+        - 'time.*.gov'
+        - 'time.*.edu.cn'
+        - 'time.*.apple.com'
+        - 'time1.*.com'
+        - 'time2.*.com'
+        - 'time3.*.com'
+        - 'time4.*.com'
+        - 'time5.*.com'
+        - 'time6.*.com'
+        - 'time7.*.com'
+        - 'ntp.*.com'
+        - 'ntp.*.com'
+        - 'ntp1.*.com'
+        - 'ntp2.*.com'
+        - 'ntp3.*.com'
+        - 'ntp4.*.com'
+        - 'ntp5.*.com'
+        - 'ntp6.*.com'
+        - 'ntp7.*.com'
+        - '*.time.edu.cn'
+        - '*.ntp.org.cn'
+        - '+.pool.ntp.org'
+        - 'time1.cloud.tencent.com'
+        # === Music Service ===
+        ## NetEase
+        - '+.music.163.com'
+        - '*.126.net'
+        ## Baidu
+        - 'musicapi.taihe.com'
+        - 'music.taihe.com'
+        ## Kugou
+        - 'songsearch.kugou.com'
+        - 'trackercdn.kugou.com'
+        ## Kuwo
+        - '*.kuwo.cn'
+        ## JOOX
+        - 'api-jooxtt.sanook.com'
+        - 'api.joox.com'
+        - 'joox.com'
+        ## QQ
+        - '*.qq.com'
+        - 'report.url.cn'
+        ## Xiami
+        - '*.xiami.com'
+        ## Migu
+        - '+.music.migu.cn'
+        # === Game Service ===
+        ## Nintendo Switch
+        - '+.srv.nintendo.net'
+        ## Sony PlayStation
+        - '+.playstation.net'
+        - '+.playstation.com'
+        - '+.stun.playstation.net'
+        ## Microsoft Xbox
+        - 'xbox.*.microsoft.com'
+        - '+.xboxlive.com'
+        # === Other ===
+        ## QQ Quick Login
+        - 'localhost.ptlogin2.qq.com'
+        ## Golang
+        - 'proxy.golang.org'
+        ## STUN Server
+        - 'stun.*.*'
+        - 'stun.*.*.*'
+        ## Bilibili CDN
+        - '*.mcdn.bilivideo.cn'
+        # === Other ===
+        - '*.bilibili.com'
+        - '*.1huizhan.com'
+        - '*.3.cn'
+        - '*.300hu.com'
+        - '*.360buy.cn'
+        - '*.360buy.com'
+        - '*.360buy.com.cn'
+        - '*.360buyimg.com'
+        - '*.360buyinternational.com'
+        - '*.360top.com'
+        - '*.jd.com'
+    
+    nameserver:
+        - system # 如果是windows或安卓客户端可使用system，如果是软路由填写你的光猫的IP地址，拨号的路由器的IP地址 DNS 不必关闭光猫的ipv6功能,openclash运行在主路由上时填写127.0.0.1 记住是替换，不要保留system
+        - 119.29.29.29 # default value
+        - 223.5.5.5
+        - https://dns.alidns.com/dns-query#h3=true # 强制 HTTP/3，与 perfer-h3 无关，强制开启 DoH 的 HTTP/3 支持，若不支持将无法使用
+        - https://doh.pub/dns-query
+
+#节点存放地址
+proxies:
+
+#代理组
+proxy-groups:    
+#自动选择
+    - name: "Auto"
+      type: url-test # 下面开启了自动测速
+      proxies:
+#         - test 这里填写你的自建节点
+       
+      use:
+          - subscribe_groups 
+      url: "http://connectivitycheck.gstatic.com/generate_204"
+      interval: 82421    #自动测速周期，单位：秒  
+#其他规则
+    - name: "PROXY"
+      type: select # 下面开启了自动测速
+      proxies:
+#         - test 这里填写你的自建节点
+          - "Auto"
+      use:
+          - subscribe_groups 
+
+# 奈飞      
+    - name: "Netflix"
+      type: select # 下面开启了自动测速
+      proxies:
+#         - test 这里填写你的自建节点
+          - "Auto"
+      use:
+          - subscribe_groups  
+# 迪士尼      
+    - name: "Disney"
+      type: select # 下面开启了自动测速
+      proxies:
+#         - test 这里填写你的自建节点
+          - "Auto"
+      use:
+          - subscribe_groups  
+# 油管      
+    - name: "Youtube"
+      type: select # 下面开启了自动测速
+      proxies:
+#         - test 这里填写你的自建节点
+          - "Auto"
+      use:
+          - subscribe_groups  
+# 声破天      
+    - name: "Spotify"
+      type: select # 下面开启了自动测速
+      proxies:
+#         - test 这里填写你的自建节点
+          - "Auto"
+      use:
+          - subscribe_groups 
+# Tiktok      
+    - name: "Tiktok"
+      type: select # 下面开启了自动测速
+      proxies:
+#         - test 这里填写你的自建节点
+          - "Auto"
+      use:
+          - subscribe_groups        
+# 电报      
+    - name: "Telegram"
+      type: select # 下面开启了自动测速
+      proxies:
+#         - test 这里填写你的自建节点
+          - "Auto"
+      use:
+          - subscribe_groups  
+     
+#代理集  如果是自建节点屏蔽这里  
+proxy-providers:
+    #自定义机场名称subscribe_groups
+    subscribe_groups:
+        type: http # http 的 path 可空置,默认储存路径为 homedir的proxies文件夹,文件名为url的md5
+        url: "" #订阅链接存放在双引号内
+        interval: 86400 #机场订阅自动更新时间 单位：秒
+        path: ./hj_sub.yaml # 默认只允许存储在 clash 的 Home Dir，如果想存储到任意位置，添加环境变量 SKIP_SAFE_PATH_CHECK=1
+        health-check:
+            enable: true
+            interval: 83214
+            # lazy: true
+            url: http://connectivitycheck.gstatic.com/generate_204
+      
+#规则集
+rule-providers:     
+    lancidr:
+        type: http
+        behavior: ipcidr
+        interval: 86400
+        path: ./ruleset/lancidr.yaml
+        url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt"  
+    private:
+        type: http
+        behavior: domain
+        interval: 86400
+        path: ./ruleset/private.yaml
+        url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/private.txt"  
+    direct:
+        type: http
+        behavior: domain
+        interval: 86400
+        path: ./ruleset/direct.yaml
+        url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt"      
+    applications:
+        type: http
+        behavior: classical
+        interval: 86400
+        path: ./ruleset/applications.yaml
+        url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/applications.txt"
+    icloud:
+        type: http
+        behavior: domain
+        interval: 86400
+        path: ./ruleset/icloud.yaml
+        url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/icloud.txt"        
+    apple:
+        type: http
+        behavior: domain
+        interval: 86400
+        path: ./ruleset/apple.yaml
+        url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/apple.txt"
+    cncidr:
+        type: http
+        behavior: ipcidr
+        interval: 86400
+        path: ./ruleset/cncidr.yaml
+        url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt"  
+    gfw:
+        type: http
+        behavior: domain
+        interval: 86400   
+        path: ./ruleset/gfw.yaml        
+        url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"        
+    
+rules:
+#域名规则
+    - RULE-SET,applications,DIRECT
+    - RULE-SET,private,DIRECT
+    - RULE-SET,icloud,DIRECT
+    - RULE-SET,apple,DIRECT
+    - GEOSITE,onedrive,DIRECT
+    - GEOSITE,microsoft@cn,DIRECT 
+    - GEOSITE,steam@cn,DIRECT
+    - GEOSITE,category-games@cn,DIRECT 
+#在这里添加自定义直连规则
+    - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,PROXY
+    - DOMAIN-SUFFIX,services.googleapis.cn,PROXY
+    - DOMAIN-SUFFIX,voidsec.com,PROXY   #voidsec 礼貌性添加所谓的dns泄露检测站
+    - DOMAIN-SUFFIX,browserleaks.com,PROXY #browserleaks 礼貌性添加所谓的dns泄露检测站
+    - DOMAIN-SUFFIX,ipleak.net,PROXY #ipleak 礼貌性添加所谓的dns泄露检测站
+    - DOMAIN-SUFFIX,mtalk.google.com,PROXY
+    - DOMAIN-SUFFIX,events.data.microsoft.com,REJECT #拦截微软部分遥测
+    - GEOSITE,youtube,Youtube  
+    - GEOSITE,telegram,Telegram
+    - GEOSITE,netflix,Netflix
+    - GEOSITE,disney,Disney
+    - GEOSITE,spotify,Spotify
+    - GEOSITE,tiktok,Tiktok
+    - GEOSITE,facebook,PROXY
+    - GEOSITE,twitter,PROXY
+    - GEOSITE,google,PROXY
+    - GEOSITE,category-scholar-!cn,PROXY
+    - GEOSITE,geolocation-!cn,PROXY
+    - RULE-SET,gfw,PROXY
+    - RULE-SET,direct,DIRECT
+    - RULE-SET,lancidr,DIRECT
+    - GEOSITE,cn,DIRECT 
+    
+#IP规则    
+    - GEOIP,private,DIRECT,no-resolve 
+    - RULE-SET,cncidr,DIRECT
+    - GEOIP,CN,DIRECT     
+    - GEOIP,telegram,Telegram,no-resolve
+    - GEOIP,netflix,Netflix,no-resolve
+    - GEOIP,google,PROXY,no-resolve
+    - GEOIP,twitter,PROXY,no-resolve
+    - GEOIP,JP,PROXY,no-resolve    
+
+#最终匹配 白名单模式
+    - MATCH,PROXY
