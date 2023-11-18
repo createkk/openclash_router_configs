@@ -1,3 +1,4 @@
+#此配置搭配openclash meta内核使用
 mixed-port: 7890 # 局域网访问Port
 bind-address: '*' #绑定IP地址
 allow-lan: true # 允许局域网访问
@@ -25,18 +26,17 @@ profile:
 
 # Tun 配置 Windows使用
 tun:
-  enable: false  #PC端开启 路由器不开启
-  stack: system # gvisor / lwip
-  dns-hijack:
-    - 0.0.0.0:53 # 需要劫持的 DNS
-  auto-route: true # 自动设置全局路由，可以自动将全局流量路由进入tun网卡。
-  auto-detect-interface: true # 自动识别出口网卡
+    enable: false  #PC端开启 路由器不开启
+    stack: system # gvisor / lwip
+    dns-hijack:
+        - 0.0.0.0:53 # 需要劫持的 DNS
+    auto-route: true # 自动设置全局路由，可以自动将全局流量路由进入tun网卡。
+    auto-detect-interface: true # 自动识别出口网卡
 
 dns:
     enable: true # 关闭将使用系统 DNS
     prefer-h3: true # 开启 DoH 支持 HTTP/3，将并发尝试
-    listen: 0.0.0.0:53 # 开启 DNS 服务器监听
-    # ipv6: false  #如果需要ipv6设置为true
+    listen: ':53' # 开启 DNS 服务器监听
     default-nameserver:
         - system # 如果是windows或安卓客户端可使用system，如果是软路由填写你的光猫的IP地址，拨号的路由器的IP地址 DNS 不必关闭光猫的ipv6功能,openclash运行在主路由上时填写127.0.0.1 记住是替换，不要保留system
         - 119.29.29.29
