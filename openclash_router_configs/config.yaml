@@ -217,6 +217,22 @@ proxy-groups:
           - "Auto"
       use:
           - subscribe_groups  
+# 推特      
+    - name: "Twitter"
+      type: select # 下面开启了自动测速
+      proxies:
+#         - test 这里填写你的自建节点
+          - "Auto"
+      use:
+          - subscribe_groups  
+# chatgpt      
+    - name: "OpenAI"
+      type: select # 下面开启了自动测速
+      proxies:
+#         - test 这里填写你的自建节点
+          - "Auto"
+      use:
+          - subscribe_groups  
      
 #代理集  如果是自建节点屏蔽这里  
 proxy-providers:
@@ -294,13 +310,37 @@ rules:
     - GEOSITE,steam@cn,DIRECT
     - GEOSITE,category-games@cn,DIRECT 
 #在这里添加自定义直连规则
-    - DOMAIN-SUFFIX,xn--ngstr-lra8j.com,PROXY
-    - DOMAIN-SUFFIX,services.googleapis.cn,PROXY
+    - DOMAIN,xn--ngstr-lra8j.com,PROXY
+    - DOMAIN,services.googleapis.cn,PROXY
+    - DOMAIN,mtalk.google.com,PROXY
     - DOMAIN-SUFFIX,voidsec.com,PROXY   #voidsec 礼貌性添加所谓的dns泄露检测站
     - DOMAIN-SUFFIX,browserleaks.com,PROXY #browserleaks 礼貌性添加所谓的dns泄露检测站
     - DOMAIN-SUFFIX,ipleak.net,PROXY #ipleak 礼貌性添加所谓的dns泄露检测站
-    - DOMAIN-SUFFIX,mtalk.google.com,PROXY
-    - DOMAIN-SUFFIX,events.data.microsoft.com,REJECT #拦截微软部分遥测
+    # chatgpt
+    - DOMAIN,chatgpt.livekit.cloud,OpenAI
+    - DOMAIN,static.cloudflareinsights.com,OpenAI
+    - DOMAIN,cdn.cloudflare.net,OpenAI
+    - DOMAIN,challenges.cloudflare.com,OpenAI
+    - DOMAIN,client-api.arkoselabs.com,OpenAI
+    - DOMAIN,events.statsigapi.net,OpenAI
+    - DOMAIN-SUFFIX,ai.com,OpenAI
+    - DOMAIN-SUFFIX,algolia.net,OpenAI
+    - DOMAIN-SUFFIX,api.statsig.com,OpenAI
+    - DOMAIN-SUFFIX,auth0.com,OpenAI
+    - DOMAIN-SUFFIX,featuregates.org,OpenAI
+    - DOMAIN-SUFFIX,identrust.com,OpenAI
+    - DOMAIN-SUFFIX,intercom.io,OpenAI
+    - DOMAIN-SUFFIX,intercomcdn.com,OpenAI
+    - DOMAIN-SUFFIX,launchdarkly.com,OpenAI
+    - DOMAIN-SUFFIX,oaistatic.com,OpenAI
+    - DOMAIN-SUFFIX,oaiusercontent.com,OpenAI
+    - DOMAIN-SUFFIX,observeit.net,OpenAI
+    - DOMAIN-SUFFIX,poe.com,OpenAI
+    - DOMAIN-SUFFIX,segment.io,OpenAI
+    - DOMAIN-SUFFIX,sentry.io,OpenAI
+    - DOMAIN-SUFFIX,stripe.com,OpenAI
+    - DOMAIN-KEYWORD,openai,OpenAI
+    - DOMAIN,events.data.microsoft.com,REJECT #拦截微软部分遥测
     - GEOSITE,youtube,Youtube  
     - GEOSITE,telegram,Telegram
     - GEOSITE,netflix,Netflix
@@ -308,7 +348,7 @@ rules:
     - GEOSITE,spotify,Spotify
     - GEOSITE,tiktok,Tiktok
     - GEOSITE,facebook,PROXY
-    - GEOSITE,twitter,PROXY
+    - GEOSITE,twitter,Twitter
     - GEOSITE,google,PROXY
     - GEOSITE,category-scholar-!cn,PROXY
     - GEOSITE,geolocation-!cn,PROXY
@@ -324,7 +364,7 @@ rules:
     - GEOIP,telegram,Telegram,no-resolve
     - GEOIP,netflix,Netflix,no-resolve
     - GEOIP,google,PROXY,no-resolve
-    - GEOIP,twitter,PROXY,no-resolve
+    - GEOIP,twitter,Twitter,no-resolve
     - GEOIP,JP,PROXY,no-resolve    
 
 #最终匹配 白名单模式

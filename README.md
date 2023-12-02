@@ -20,3 +20,4 @@
 - [@Loyalsoldier/geoip](https://github.com/Loyalsoldier/geoip)
 - [@Loyalsoldier/v2ray-rules-dat](https://github.com/Loyalsoldier/v2ray-rules-dat)
 - [@Loyalsoldier/clash-rules](https://github.com/Loyalsoldier/clash-rules/tree/master)
+- [@blackmatrix7/ios_rule_script](https://github.com/blackmatrix7/ios_rule_script)
