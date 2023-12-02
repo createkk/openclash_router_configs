@@ -155,7 +155,6 @@ proxy-groups:
       type: url-test # 下面开启了自动测速
       proxies:
 #         - test 这里填写你的自建节点
-       
       use:
           - subscribe_groups 
       url: "http://connectivitycheck.gstatic.com/generate_204"
