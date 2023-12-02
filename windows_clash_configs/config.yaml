@@ -167,7 +167,6 @@ proxy-groups:
           - "Auto"
       use:
           - subscribe_groups 
-
 # 奈飞      
     - name: "Netflix"
       type: select # 下面开启了自动测速
@@ -355,7 +354,6 @@ rules:
     - RULE-SET,direct,DIRECT
     - RULE-SET,lancidr,DIRECT
     - GEOSITE,cn,DIRECT 
-    
 #IP规则    
     - GEOIP,private,DIRECT,no-resolve 
     - RULE-SET,cncidr,DIRECT
