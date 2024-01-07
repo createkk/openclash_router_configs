@@ -21,7 +21,7 @@ geox-url:                           # 自定义 geodata url, 需要有代理的�
   
 # fakeip 本地存储，省略DNS查询
 profile:
-    store-selected: false      # 存储 select 选择记录
+    store-selected: true      # 存储 select 选择记录
     store-fake-ip: true        # 持久化 fake-ip
 
 # Tun 配置 Windows使用
@@ -231,7 +231,15 @@ proxy-groups:
           - "Auto"
       use:
           - subscribe_groups  
-     
+# Copilot
+    - name: "Copilot"
+      type: select # 下面开启了自动测速
+      proxies:
+#         - test 这里填写你的自建节点
+          - "Auto"
+      use:
+          - subscribe_groups    
+          
 #代理集  如果是自建节点屏蔽这里  
 proxy-providers:
     #自定义机场名称subscribe_groups
@@ -338,6 +346,28 @@ rules:
     - DOMAIN-SUFFIX,sentry.io,OpenAI
     - DOMAIN-SUFFIX,stripe.com,OpenAI
     - DOMAIN-KEYWORD,openai,OpenAI
+    - DOMAIN,api.msn.com,Copilot
+    - DOMAIN,assets.msn.com,Copilot
+    - DOMAIN,copilot.microsoft.com,Copilot
+    - DOMAIN,dealczars.bing-shopping.microsoft-falcon.io,Copilot
+    - DOMAIN,edgeservices.bing.com,Copilot
+    - DOMAIN,functional.events.data.microsoft.com,Copilot
+    - DOMAIN,gateway.bingviz.microsoftapp.net,Copilot
+    - DOMAIN,location.microsoft.com,Copilot
+    - DOMAIN,login.microsoftonline.com,Copilot
+    - DOMAIN,proteus-assetstore.azurewebsites.net,Copilot
+    - DOMAIN,self.events.data.microsoft.com,Copilot
+    - DOMAIN,services.bingapis.com,Copilot
+    - DOMAIN,shopping.bing-shopping.microsoft-falcon.io,Copilot
+    - DOMAIN,sapphire.api.microsoftapp.net,Copilot
+    - DOMAIN,sr.bing.com,Copilot
+    - DOMAIN,sydney.bing.com,Copilot
+    - DOMAIN,ssl.bing.com,Copilot
+    - DOMAIN,th.bing.com,Copilot
+    - DOMAIN,www.bing.com,Copilot
+    - DOMAIN,www2.bing.com,Copilot
+    - DOMAIN,www.bingapis.com,Copilot
+    - DOMAIN-SUFFIX,edge.microsoft.com,Copilot
     - DOMAIN,events.data.microsoft.com,REJECT #拦截微软部分遥测
     - GEOSITE,youtube,Youtube  
     - GEOSITE,telegram,Telegram
