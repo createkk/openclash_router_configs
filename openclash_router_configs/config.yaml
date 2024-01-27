@@ -22,7 +22,7 @@ geox-url:                           # 自定义 geodata url, 需要有代理的�
 # fakeip 本地存储，省略DNS查询
 profile:
     store-selected: true      # 存储 select 选择记录
-    store-fake-ip: true        # 持久化 fake-ip
+    store-fake-ip: false        # 持久化 fake-ip
 
 # Tun 配置 Windows使用
 tun:
@@ -39,7 +39,7 @@ dns:
     listen: ':53' # 开启 DNS 服务器监听
     default-nameserver:
         - system # 如果是windows或安卓客户端可使用system，如果是软路由填写你的光猫的IP地址，拨号的路由器的IP地址 DNS 不必关闭光猫的ipv6功能,openclash运行在主路由上时填写127.0.0.1 记住是替换，不要保留system
-        - 119.29.29.29
+        - 223.5.5.5
     enhanced-mode: fake-ip
     fake-ip-range: 198.18.0.1/16
     fake-ip-filter:   #这里可以填写不使用fakeip的域名
@@ -140,7 +140,7 @@ dns:
     
     nameserver:
         - system # 如果是windows或安卓客户端可使用system，如果是软路由填写你的光猫的IP地址，拨号的路由器的IP地址 DNS 不必关闭光猫的ipv6功能,openclash运行在主路由上时填写127.0.0.1 记住是替换，不要保留system
-        - 119.29.29.29 # default value
+        - 114.114.114.114 # default value
         - 223.5.5.5
         - https://dns.alidns.com/dns-query#h3=true # 强制 HTTP/3，与 perfer-h3 无关，强制开启 DoH 的 HTTP/3 支持，若不支持将无法使用
         - https://doh.pub/dns-query
@@ -158,7 +158,7 @@ proxy-groups:
       use:
           - subscribe_groups 
       url: "http://connectivitycheck.gstatic.com/generate_204"
-      interval: 82421    #自动测速周期，单位：秒  
+      interval: 177    #自动测速周期，单位：秒  
 #其他规则
     - name: "PROXY"
       type: select # 下面开启了自动测速
@@ -250,7 +250,7 @@ proxy-providers:
         path: ./hj_sub.yaml # 默认只允许存储在 clash 的 Home Dir，如果想存储到任意位置，添加环境变量 SKIP_SAFE_PATH_CHECK=1
         health-check:
             enable: true
-            interval: 83214
+            interval: 165
             # lazy: true
             url: http://connectivitycheck.gstatic.com/generate_204
       

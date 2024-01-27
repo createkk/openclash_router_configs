@@ -9,3 +9,6 @@
 4. 使用命令 `mv 文件包名 clash_meta`解压，文件包名可以用`ls`命令查看
 5. 使用命令 `chmod 777 clash_meta`将文件赋予读写权限
 6. 使用命令 `mv clash_meta /etc/openclash/core`复制到openclash内核路径即可完成更新！
+
+## 其他问题
+插件运行时，内存占用会逐渐变高及DNS缓存的问题，在插件设置->定时重启 内开启定时重启，并设置每天凌晨时间段重启就行
