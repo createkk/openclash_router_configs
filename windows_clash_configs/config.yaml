@@ -38,7 +38,7 @@ dns:
     prefer-h3: true # 开启 DoH 支持 HTTP/3，将并发尝试
     listen: ':53' # 开启 DNS 服务器监听ipv4/ipv6
     default-nameserver:
-        - system # 如果是windows或安卓客户端可使用system，如果是软路由填写你的光猫的IP地址，拨号的路由器的IP地址 DNS 不必关闭光猫的ipv6功能,openclash运行在主路由上时填写127.0.0.1 记住是替换，不要保留system
+        - system # 如果是windows或安卓客户端可使用system，如果是软路由填写你的光猫的IP地址，拨号的路由器的IP地址 DNS 不必关闭光猫的ipv6功能,openclash运行在主路由上时填写任意公共DNS 记住是替换，不要保留system
         - 223.5.5.5
     enhanced-mode: fake-ip
     fake-ip-range: 198.18.0.1/16
@@ -139,7 +139,7 @@ dns:
         - '*.jd.com'
     
     nameserver:
-        - system # 如果是windows或安卓客户端可使用system，如果是软路由填写你的光猫的IP地址，拨号的路由器的IP地址 DNS 不必关闭光猫的ipv6功能,openclash运行在主路由上时填写127.0.0.1 记住是替换，不要保留system
+        - system # 如果是windows或安卓客户端可使用system，如果是软路由填写你的光猫的IP地址，拨号的路由器的IP地址 DNS 不必关闭光猫的ipv6功能,openclash运行在主路由上时填写任意公共DNS 记住是替换，不要保留system
         - 114.114.114.114 # default value
         - 223.5.5.5
         - https://dns.alidns.com/dns-query#h3=true # 强制 HTTP/3，与 perfer-h3 无关，强制开启 DoH 的 HTTP/3 支持，若不支持将无法使用
@@ -239,6 +239,14 @@ proxy-groups:
           - "Auto"
       use:
           - subscribe_groups    
+# Onedrive
+    - name: "Onedrive"
+      type: select # 下面开启了自动测速
+      proxies:
+#         - test 这里填写你的自建节点
+          - "Auto"
+      use:
+          - subscribe_groups          
           
 #代理集  如果是自建节点屏蔽这里  
 proxy-providers:
@@ -311,7 +319,6 @@ rules:
     - RULE-SET,private,DIRECT
     - RULE-SET,icloud,DIRECT
     - RULE-SET,apple,DIRECT
-    - GEOSITE,onedrive,DIRECT
     - GEOSITE,microsoft@cn,DIRECT 
     - GEOSITE,steam@cn,DIRECT
     - GEOSITE,category-games@cn,DIRECT 
@@ -369,6 +376,7 @@ rules:
     - DOMAIN,www.bingapis.com,Copilot
     - DOMAIN-SUFFIX,edge.microsoft.com,Copilot
     - DOMAIN,events.data.microsoft.com,REJECT #拦截微软部分遥测
+    - GEOSITE,onedrive,Onedrive
     - GEOSITE,youtube,Youtube  
     - GEOSITE,telegram,Telegram
     - GEOSITE,netflix,Netflix
