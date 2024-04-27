@@ -14,6 +14,8 @@ ipv6: false #软路由上不建议开启
 # external-ui: .\ui\public
 
 geodata-mode: true
+geo-auto-update: true
+geo-update-interval: 24
 geox-url:                           # 自定义 geodata url, 需要有代理的前提才能下载geoip和geosite
     geoip: "https://gcore.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
     geosite: "https://gcore.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
