@@ -20,11 +20,12 @@ geox-url:                           # 自定义 geodata url, 需要有代理的�
     geoip: "https://gcore.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
     geosite: "https://gcore.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
     mmdb: "https://gcore.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
-  
+
+keep-alive-interval: 15  
 # fakeip 本地存储，省略DNS查询
 profile:
-    store-selected: true      # 存储 select 选择记录
-    store-fake-ip: false        # 持久化 fake-ip
+    store-selected: false      # 存储 select 选择记录
+    store-fake-ip: true        # 持久化 fake-ip
 
 # Tun 配置 Windows使用
 tun:
@@ -34,14 +35,23 @@ tun:
         - 0.0.0.0:53 # 需要劫持的 DNS
     auto-route: true # 自动设置全局路由，可以自动将全局流量路由进入tun网卡。
     auto-detect-interface: true # 自动识别出口网卡
+    endpoint-independent-nat: true
+    inet4-route-address: # 启用 auto-route 时使用自定义路由而不是默认路由
+        - 0.0.0.0/1
+        - 128.0.0.0/1
+    inet6-route-address: # 启用 auto-route 时使用自定义路由而不是默认路由
+        - "::/1"
+        - "8000::/1"
 
 dns:
     enable: true # 关闭将使用系统 DNS
     prefer-h3: true # 开启 DoH 支持 HTTP/3，将并发尝试
     listen: ':53' # 开启 DNS 服务器监听ipv4/ipv6
     default-nameserver:
-        - system # 如果是windows或安卓客户端可使用system，如果是软路由填写你的光猫的IP地址，拨号的路由器的IP地址 DNS 不必关闭光猫的ipv6功能,openclash运行在主路由上时填写任意公共DNS 记住是替换，不要保留system
-        - 223.5.5.5
+        - 114.114.114.114
+        - 8.8.8.8
+        - tls://223.5.5.5:853
+        - system
     enhanced-mode: fake-ip
     fake-ip-range: 198.18.0.1/16
     fake-ip-filter:   #这里可以填写不使用fakeip的域名
@@ -141,11 +151,12 @@ dns:
         - '*.jd.com'
     
     nameserver:
-        - system # 如果是windows或安卓客户端可使用system，如果是软路由填写你的光猫的IP地址，拨号的路由器的IP地址 DNS 不必关闭光猫的ipv6功能,openclash运行在主路由上时填写任意公共DNS 记住是替换，不要保留system
         - 114.114.114.114 # default value
-        - 223.5.5.5
-        - https://dns.alidns.com/dns-query#h3=true # 强制 HTTP/3，与 perfer-h3 无关，强制开启 DoH 的 HTTP/3 支持，若不支持将无法使用
+        - 8.8.8.8
+        - tls://223.5.5.5:853 # DNS over TLS
         - https://doh.pub/dns-query
+        - https://dns.alidns.com/dns-query#h3=true 
+        - system
 
 #节点存放地址
 proxies:
@@ -159,7 +170,7 @@ proxy-groups:
 #         - test 这里填写你的自建节点
       use:
           - subscribe_groups 
-      url: "http://connectivitycheck.gstatic.com/generate_204"
+      url: "http://cp.cloudflare.com/generate_204"
       interval: 186    #自动测速周期，单位：秒  
 #其他规则
     - name: "PROXY"
@@ -262,7 +273,7 @@ proxy-providers:
             enable: true
             interval: 156
             # lazy: true
-            url: http://connectivitycheck.gstatic.com/generate_204
+            url: http://cp.cloudflare.com/generate_204
       
 #规则集
 rule-providers:     
@@ -378,6 +389,7 @@ rules:
     - DOMAIN,www.bingapis.com,Copilot
     - DOMAIN-SUFFIX,edge.microsoft.com,Copilot
     - DOMAIN,events.data.microsoft.com,REJECT #拦截微软部分遥测
+    - GEOSITE,adobe,REJECT #屏蔽adobe
     - GEOSITE,onedrive,Onedrive
     - GEOSITE,youtube,Youtube  
     - GEOSITE,telegram,Telegram
