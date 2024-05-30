@@ -32,7 +32,7 @@ tun:
     enable: true  #PC端开启 路由器不开启
     stack: mixed # gvisor / lwip /mixed  混合模式
     dns-hijack:
-        - 0.0.0.0:53 # 需要劫持的 DNS
+        - 198.0.0.1:53 # 需要劫持的 DNS
     auto-route: true # 自动设置全局路由，可以自动将全局流量路由进入tun网卡。
     auto-detect-interface: true # 自动识别出口网卡
     endpoint-independent-nat: true
@@ -149,7 +149,17 @@ dns:
         - '*.360buyinternational.com'
         - '*.360top.com'
         - '*.jd.com'
-    
+        # WiFi-Calling 如果你发现你的WiFi Calling不能发图片 大概率是节点UDP问题
+        - t-mobile.com
+        - crl.t-mobile.com
+        - eas3.msg.t-mobile.com
+        - mascns.t-mobile.com
+        - ns.sipgeo.t-mobile.com
+        - epdg.epc.mnc240.mcc310.pub.3gppnetwork.org
+        - epdg.epc.mnc260.mcc310.pub.3gppnetwork.org
+        - ss.epdg.epc.mnc260.mcc310.pub.3gppnetwork.org
+        - ss.epdg.epc.geo.mnc260.mcc310.pub.3gppnetwork.org  
+        
     nameserver:
         - 114.114.114.114 # default value
         - 8.8.8.8
