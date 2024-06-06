@@ -17,9 +17,9 @@ geodata-mode: true
 geo-auto-update: true
 geo-update-interval: 24
 geox-url:                           # 自定义 geodata url, 需要有代理的前提才能下载geoip和geosite
-    geoip: "https://gcore.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geoip.dat"
-    geosite: "https://gcore.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/geosite.dat"
-    mmdb: "https://gcore.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
+    geoip: "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geoip.dat"
+    geosite: "https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/geosite.dat"
+    mmdb: "https://cdn.jsdelivr.net/gh/MetaCubeX/meta-rules-dat@release/country.mmdb"
 
 keep-alive-interval: 15  
 # fakeip 本地存储，省略DNS查询
@@ -32,10 +32,10 @@ tun:
     enable: true  #PC端开启 路由器不开启
     stack: mixed # gvisor / lwip /mixed  混合模式
     dns-hijack:
-        - 198.0.0.1:53 # 需要劫持的 DNS
+        - 0.0.0.0:53 # 需要劫持的 DNS
     auto-route: true # 自动设置全局路由，可以自动将全局流量路由进入tun网卡。
     auto-detect-interface: true # 自动识别出口网卡
-    endpoint-independent-nat: true
+    endpoint-independent-nat: true 
     inet4-route-address: # 启用 auto-route 时使用自定义路由而不是默认路由
         - 0.0.0.0/1
         - 128.0.0.0/1
@@ -46,6 +46,7 @@ tun:
 dns:
     enable: true # 关闭将使用系统 DNS
     prefer-h3: true # 开启 DoH 支持 HTTP/3，将并发尝试
+    ipv6: true
     listen: ':53' # 开启 DNS 服务器监听ipv4/ipv6
     default-nameserver:
         - 114.114.114.114
@@ -64,8 +65,8 @@ dns:
         - '*.linksys.com'
         - '*.linksyssmartwifi.com'
         # === Apple Software Update Service ===
-        - 'swscan.apple.com'
-        - 'mesu.apple.com'
+        - swscan.apple.com
+        - mesu.apple.com
         # === Windows 10 Connnect Detection ===
         - '*.msftconnecttest.com'
         - '*.msftncsi.com'
@@ -93,26 +94,26 @@ dns:
         - '*.time.edu.cn'
         - '*.ntp.org.cn'
         - '+.pool.ntp.org'
-        - 'time1.cloud.tencent.com'
+        - time1.cloud.tencent.com
         # === Music Service ===
         ## NetEase
         - '+.music.163.com'
         - '*.126.net'
         ## Baidu
-        - 'musicapi.taihe.com'
-        - 'music.taihe.com'
+        - musicapi.taihe.com
+        - music.taihe.com
         ## Kugou
-        - 'songsearch.kugou.com'
-        - 'trackercdn.kugou.com'
+        - songsearch.kugou.com
+        - trackercdn.kugou.com
         ## Kuwo
         - '*.kuwo.cn'
         ## JOOX
-        - 'api-jooxtt.sanook.com'
-        - 'api.joox.com'
-        - 'joox.com'
+        - api-jooxtt.sanook.com
+        - api.joox.com
+        - joox.com
         ## QQ
         - '*.qq.com'
-        - 'report.url.cn'
+        - report.url.cn
         ## Xiami
         - '*.xiami.com'
         ## Migu
@@ -129,9 +130,9 @@ dns:
         - '+.xboxlive.com'
         # === Other ===
         ## QQ Quick Login
-        - 'localhost.ptlogin2.qq.com'
+        - localhost.ptlogin2.qq.com
         ## Golang
-        - 'proxy.golang.org'
+        - proxy.golang.org
         ## STUN Server
         - 'stun.*.*'
         - 'stun.*.*.*'
@@ -352,30 +353,6 @@ rules:
     - DOMAIN-SUFFIX,voidsec.com,PROXY   #voidsec 礼貌性添加所谓的dns泄露检测站
     - DOMAIN-SUFFIX,browserleaks.com,PROXY #browserleaks 礼貌性添加所谓的dns泄露检测站
     - DOMAIN-SUFFIX,ipleak.net,PROXY #ipleak 礼貌性添加所谓的dns泄露检测站
-    # chatgpt
-    - DOMAIN,chatgpt.livekit.cloud,OpenAI
-    - DOMAIN,static.cloudflareinsights.com,OpenAI
-    - DOMAIN,cdn.cloudflare.net,OpenAI
-    - DOMAIN,challenges.cloudflare.com,OpenAI
-    - DOMAIN,client-api.arkoselabs.com,OpenAI
-    - DOMAIN,events.statsigapi.net,OpenAI
-    - DOMAIN-SUFFIX,ai.com,OpenAI
-    - DOMAIN-SUFFIX,algolia.net,OpenAI
-    - DOMAIN-SUFFIX,api.statsig.com,OpenAI
-    - DOMAIN-SUFFIX,auth0.com,OpenAI
-    - DOMAIN-SUFFIX,featuregates.org,OpenAI
-    - DOMAIN-SUFFIX,identrust.com,OpenAI
-    - DOMAIN-SUFFIX,intercom.io,OpenAI
-    - DOMAIN-SUFFIX,intercomcdn.com,OpenAI
-    - DOMAIN-SUFFIX,launchdarkly.com,OpenAI
-    - DOMAIN-SUFFIX,oaistatic.com,OpenAI
-    - DOMAIN-SUFFIX,oaiusercontent.com,OpenAI
-    - DOMAIN-SUFFIX,observeit.net,OpenAI
-    - DOMAIN-SUFFIX,poe.com,OpenAI
-    - DOMAIN-SUFFIX,segment.io,OpenAI
-    - DOMAIN-SUFFIX,sentry.io,OpenAI
-    - DOMAIN-SUFFIX,stripe.com,OpenAI
-    - DOMAIN-KEYWORD,openai,OpenAI
     - DOMAIN,api.msn.com,Copilot
     - DOMAIN,assets.msn.com,Copilot
     - DOMAIN,copilot.microsoft.com,Copilot
@@ -400,6 +377,7 @@ rules:
     - DOMAIN-SUFFIX,edge.microsoft.com,Copilot
     - DOMAIN,events.data.microsoft.com,REJECT #拦截微软部分遥测
     - GEOSITE,adobe,REJECT #屏蔽adobe
+    - GEOSITE,openai,OpenAI  # chatgpt
     - GEOSITE,onedrive,Onedrive
     - GEOSITE,youtube,Youtube  
     - GEOSITE,telegram,Telegram
