@@ -159,7 +159,10 @@ dns:
         - epdg.epc.mnc240.mcc310.pub.3gppnetwork.org
         - epdg.epc.mnc260.mcc310.pub.3gppnetwork.org
         - ss.epdg.epc.mnc260.mcc310.pub.3gppnetwork.org
-        - ss.epdg.epc.geo.mnc260.mcc310.pub.3gppnetwork.org  
+        - ss.epdg.epc.geo.mnc260.mcc310.pub.3gppnetwork.org
+        # Hygege提供
+        - services.googleapis.cn
+        - xn--ngstr-lra8j.com        
         
     nameserver:
         - 114.114.114.114 # default value
@@ -181,8 +184,8 @@ proxy-groups:
 #         - test 这里填写你的自建节点
       use:
           - subscribe_groups 
-      url: "http://cp.cloudflare.com/generate_204"
-      interval: 186    #自动测速周期，单位：秒  
+      url: "http://www.gstatic.com/generate_204"
+      interval: 300   #自动测速周期，单位：秒  
 #其他规则
     - name: "PROXY"
       type: select # 下面开启了自动测速
