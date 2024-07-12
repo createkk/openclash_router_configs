@@ -53,7 +53,7 @@ dns:
         - 114.114.114.114
         - 8.8.8.8
         - tls://223.5.5.5:853
-        - system # 如果是windows或安卓客户端可使用system，如果是软路由填写你的拨号光猫/路由器的IP地址
+        - 192.168.1.1 # 如果是windows或安卓客户端可使用system，如果是软路由填写你的拨号光猫/路由器的IP地址
 
     enhanced-mode: fake-ip
     fake-ip-range: 198.18.0.1/16
@@ -173,7 +173,7 @@ dns:
         - tls://223.5.5.5:853 # DNS over TLS
         - https://doh.pub/dns-query
         - https://dns.alidns.com/dns-query#h3=true 
-        - system
+        - 192.168.1.1
 
 #节点存放地址
 proxies:
@@ -281,9 +281,9 @@ proxy-groups:
 #代理集  如果是自建节点屏蔽这里  
 proxy-providers:
     #自定义机场名称subscribe_groups
-    subscribe_groups:
+    Flower:
         type: http # http 的 path 可空置,默认储存路径为 homedir的proxies文件夹,文件名为url的md5
-        url: "" #订阅链接存放在双引号内
+        url: "https://api-huacloud.net/sub?target=clash&insert=true&emoji=true&udp=true&clash.doh=true&new_name=true&filename=Flower_Trojan&url=https%3A%2F%2Fapi.xmancdn.net%2Fosubscribe.php%3Fsid%3D78021%26token%3DF9INAamK" #订阅链接存放在双引号内
         interval: 86400 #机场订阅自动更新时间 单位：秒
         path: ./hj_sub.yaml # 默认只允许存储在 clash 的 Home Dir，如果想存储到任意位置，添加环境变量 SKIP_SAFE_PATH_CHECK=1
         health-check:
