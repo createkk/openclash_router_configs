@@ -18,20 +18,20 @@ tcp-concurrent: false
 #external-ui: .\ui\public
 
 # Tun 配置 Windows使用
-tun:
-    enable: false  #PC端按需开启 不建议小白开启 路由器不开启
-    stack: mixed # gvisor / lwip
-    dns-hijack:
-        - 0.0.0.0:53 # 需要劫持的 DNS
-    auto-route: true # 自动设置全局路由，可以自动将全局流量路由进入tun网卡。
-    auto-detect-interface: true # 自动识别出口网卡
-    endpoint-independent-nat: true
-    inet4-route-address: # 启用 auto-route 时使用自定义路由而不是默认路由
-        - 0.0.0.0/1
-        - 128.0.0.0/1
-#  inet6-route-address: # 启用 auto-route 时使用自定义路由而不是默认路由
-#    - "::/1"
-#    - "8000::/1"
+#tun:
+#    enable: true  #PC端按需开启 不建议小白开启 路由器不开启
+#    stack: system # gvisor / lwip
+#    auto-route: true # 自动设置全局路由，可以自动将全局流量路由进入tun网卡。
+#    auto-redirect: true
+#    auto-detect-interface: true # 自动识别出口网卡
+#    dns-hijack:
+#       - any:53
+#       - tcp://any:53
+#    route-address:
+#       - 0.0.0.0/1
+#       - 128.0.0.0/1
+#       - "::/1"
+#       - "8000::/1"
 
 dns:
     enable: true
@@ -41,11 +41,9 @@ dns:
     use-system-hosts: true
     listen: 0.0.0.0:1053
     ipv6: false
-    default-nameserver:
-        - system
-        - 223.5.5.5
     nameserver:
         - system
+        - 223.5.5.5
     enhanced-mode: fake-ip
     fake-ip-range: 198.18.0.1/16
     fake-ip-filter:
@@ -104,7 +102,7 @@ proxy-groups:
       use:
           - subscribe_groups  
 # BiliBili      
-    - name: Bilibili
+    - name: BiliBili
       type: select # 下面开启了自动测速
       proxies:
 #         - test 这里填写你的自建节点
@@ -186,7 +184,7 @@ proxy-groups:
           - subscribe_groups   
           
 # Paypal
-    - name: Paypal
+    - name: PayPal
       type: select # 下面开启了自动测速
       proxies:
 #         - test 这里填写你的自建节点
@@ -214,7 +212,7 @@ proxy-providers:
         health-check:
             enable: true
             interval: 300
-            url: http://cp.cloudflare.com/generate_204
+            url: http://www.apple.com/library/test/success.html
       
 rule-providers:
     Apple:
